@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>BWJS_test_Boom</title>
+    <link rel="stylesheet" href="Boom.css">
+    
+</head>
+
+<body>
+
+    <div id="my-container">
+    <img id="image" src="炸弹_未点燃.png" alt="找不到图片">
+    </div>   
+
+
+    
+    <button onclick="start()"> 开始 </button>
+    <p id="p">点击上方侧按钮开始</p>
+	<input type="number" id="number" name="number">
+	<button onclick="Try()">Try</button>
+
+    <audio src="ranshao.wav" id="ranshao" loop></audio>
+    <audio src="d1.wav" id="d1" loop></audio>
+    <audio src="d2.wav" id="d2" loop></audio>
+    <audio src="d3.wav" id="d3" loop></audio>
+    <audio src="Boom.wav" id="Boom" ></audio>
+
+
+	
+
+
+    <!--代码-->
+    <script>
+
+    var BoomNum;
+    var min=1;
+    var max=100;
+    
+
+    function start(){
+    image.src = "炸弹.gif";
+    ranshao.play();
+    BoomNum= Math.floor(Math.random() * 100)+1;
+    p.innerHTML="1~100";
+    console.log(BoomNum)
+    }
+
+    function Try() {
+			var num = document.getElementById("number").value;
+			console.log(num); 
+
+            if (num==BoomNum){
+                d1.pause();
+                d2.pause();
+                d3.pause();
+                ranshao.pause();
+                Boom.play();
+                image.src = "Boom.gif";
+                setTimeout(function() {
+                    image.src ="Gameover.png";
+                }, 4000); 
+            }else if(num>BoomNum){
+                max=num;
+            }else if(num<BoomNum){
+                min=num;
+            }
+
+            p.innerHTML=min+"~"+max;
+
+            if((max-min)<10){
+                d1.pause();
+                d2.pause();
+                d3.pause();
+                d3.play();
+            }else if((max-min)<30){
+                d1.pause();
+                d2.pause();
+                d3.pause();
+                d2.play();
+            }else if((max-min)<50){
+                d1.pause();
+                d2.pause();
+                d3.pause();
+                d1.play();
+            }
+
+
+            
+			
+	}
+
+    </script>
+
+</body>
+
+</html>
